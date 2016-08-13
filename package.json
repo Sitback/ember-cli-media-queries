@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-media-queries",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.0",
+  "description": "Ember addon for observing media queries.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "",
+  "repository": "https://github.com/varoot/ember-cli-media-queries",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Varoot Phasuthadol",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
