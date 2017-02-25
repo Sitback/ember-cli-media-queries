@@ -93,14 +93,15 @@ will render the component as:
 
 ## Contribution
 
-* `git clone` this repository
+* `git clone <repository-url>` this repository
+* `cd ember-cli-media-queries`
 * `npm install`
 * `bower install`
 
 ## Running Tests
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
