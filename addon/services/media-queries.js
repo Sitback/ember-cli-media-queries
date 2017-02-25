@@ -8,7 +8,8 @@ export default Ember.Service.extend({
   _matchers: null,
 
   classNames: Ember.computed('matches.[]', function() {
-    return this.get('matches').map(this.get('classNameFromQueryKey')).join(' ');
+    let transformFunc = this.get('classNameFromQueryKey').bind(this);
+    return this.get('matches').map(transformFunc).join(' ');
   }),
 
   classNameFromQueryKey(key) {
@@ -19,21 +20,30 @@ export default Ember.Service.extend({
     this._super(...arguments);
 
     let media = this.get('media');
-    Ember.assert('`media` must be overridden as a JavaScript object', Ember.typeOf(media) === 'object');
+    Ember.assert('ember-cli-media-queries: `media` must be overridden as a JavaScript object in media-queries service', Ember.typeOf(media) === 'object');
 
     this.set('matches', Ember.A());
 
     let matchers = {};
     let matcher = (this.get('matcher') || window.matchMedia);
+    let isMatcherFunction = (typeof matcher === 'function');
+
     Object.keys(media).forEach((key) => {
+      let isMediaKey = `is${Ember.String.classify(key)}`;
+
+      if (!isMatcherFunction) {
+        // matcher function is missing e.g. FastBoot
+        this.set(isMediaKey, false);
+        return;
+      }
+
       let query = media[key];
       let mediaQueryList = matcher(query);
-      let isMedia = `is${Ember.String.classify(key)}`;
 
       let listener = Ember.run.bind(this, function(mql) {
-        this.set(isMedia, mql.matches);
+        this.set(isMediaKey, mql.matches);
         if (mql.matches) {
-          this.get('matches').addObject(key);
+          this.get('matches').pushObject(key);
         } else {
           this.get('matches').removeObject(key);
         }
