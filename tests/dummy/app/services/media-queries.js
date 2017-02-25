@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import MediaQueries from 'ember-cli-media-queries/services/media-queries';
 
 export default MediaQueries.extend({
@@ -8,4 +9,13 @@ export default MediaQueries.extend({
     jumbo:       '(min-width: 1201px)',
     desktopPlus: '(min-width: 993px)',
   },
+
+  fastboot: Ember.inject.service(),
+
+  detectFastboot: Ember.on('init', function() {
+    if (this.get('fastboot.isFastBoot')) {
+      // Testing FastBoot by emulating Mobile layout
+      this.emulate('mobile');
+    }
+  }),
 });

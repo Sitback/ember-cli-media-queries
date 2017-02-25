@@ -1,11 +1,11 @@
-{{#if media.isMobile}}
+{{#if mediaQueries.isMobile}}
   Mobile
-{{else if media.isTablet}}
+{{else if mediaQueries.isTablet}}
   Tablet
-{{else if media.isDesktop}}
+{{else if mediaQueries.isDesktop}}
   Desktop
-{{else if media.isJumbo}}
+{{else if mediaQueries.isJumbo}}
   Jumbo
 {{else}}
-  Others
+  None
 {{/if}}

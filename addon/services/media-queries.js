@@ -63,6 +63,20 @@ export default Ember.Service.extend({
     this.set('_matchers', matchers);
   },
 
+  emulate(...mediaTypes) {
+    let media = this.get('media');
+    let matches = [];
+    Object.keys(media).forEach((key) => {
+      let isMediaKey = `is${Ember.String.classify(key)}`;
+      let isMediaMatch = (mediaTypes.indexOf(key) !== -1);
+      this.set(isMediaKey, isMediaMatch);
+      if (isMediaMatch) {
+        matches.push(key);
+      }
+    });
+    this.get('matches').setObjects(matches);
+  },
+
   willDestroy() {
     let matchers = this.get('_matchers');
     if (matchers) {
